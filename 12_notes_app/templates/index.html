@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}My Notes - Personal Notes App{% endblock %}
+
+{% block content %}
+    <h1>My Personal Notes</h1>
+    
+    <div class="nav-links">
+        <a href="{{ url_for('add_note') }}" class="btn">Add New Note</a>
+    </div>
+    
+    {% if notes %}
+        {% for note in notes %}
+            <div class="note">
+                {{ note }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <p>No notes yet. <a href="{{ url_for('add_note') }}">Add your first note!</a></p>
+        </div>
+    {% endif %}
+{% endblock %}
