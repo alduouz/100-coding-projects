@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Add Note - Personal Notes App{% endblock %}
+
+{% block content %}
+    <h1>Add a New Note</h1>
+    
+    <div class="nav-links">
+        <a href="{{ url_for('index') }}">← Back to Notes</a>
+    </div>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="content">Note Content:</label>
+            <textarea name="content" id="content" rows="6" placeholder="Write your note here..." required></textarea>
+        </div>
+        <button type="submit" class="btn">Save Note</button>
+        <a href="{{ url_for('index') }}" class="btn" style="background-color: #6c757d;">Cancel</a>
+    </form>
+{% endblock %}
