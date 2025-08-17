@@ -9,8 +9,22 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 DATA_DIR = os.environ.get("DATA_DIR", ".")
-os.makedirs(DATA_DIR, exist_ok=True)
+try:
+    os.makedirs(DATA_DIR, exist_ok=True)
+    # Test write permissions
+    test_file = os.path.join(DATA_DIR, "test_write.tmp")
+    with open(test_file, 'w') as f:
+        f.write("test")
+    os.remove(test_file)
+    print(f"✅ Data directory {DATA_DIR} is writable")
+except Exception as e:
+    print(f"❌ Data directory error: {e}")
+    # Fallback to current directory if data dir fails
+    DATA_DIR = "."
+    print(f"Using fallback directory: {DATA_DIR}")
+
 DATABASE_NAME = os.path.join(DATA_DIR, "notes.db")
+print(f"Database will be created at: {DATABASE_NAME}")
 
 def init_database():
     """Initialize SQLite database and create tables if they don't exist."""
