@@ -56,6 +56,31 @@
 
 ---
 
+## 6) Deployment Checklist
+
+### 6.1 Pre-Deployment Requirements
+- [ ] `.dockerignore` or `.gitignore` excludes: `venv/`, `__pycache__/`, `*.pyc`, `.env`, `.DS_Store`
+- [ ] `requirements.txt` in project root with all dependencies
+- [ ] `Procfile` with correct start command: `web: gunicorn app:app`
+- [ ] Environment variables documented in `.env.example`
+- [ ] Database initialization runs at module level (not just in `if __name__ == '__main__'`)
+- [ ] App binds to `0.0.0.0` and uses `$PORT` environment variable
+- [ ] Production configuration (no debug mode, secure SECRET_KEY)
+
+### 6.2 Platform-Specific Files
+- **Render**: `render.yaml` (if using infrastructure as code)
+- **Railway**: Minimal config - let auto-detection work
+- **Fly.io**: `fly.toml`
+- **Heroku**: `Procfile` only
+
+### 6.3 Database Best Practices
+- Use environment variables for database paths
+- Handle database initialization at app startup
+- Include error handling for file/directory permissions
+- Document persistent storage requirements
+
+---
+
 ## 8) Claude Instructions (Tuning)
 
 ### 8.1 Response Formatting Rules
