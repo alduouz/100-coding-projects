@@ -281,7 +281,9 @@ def delete_note(note_id):
     
     return render_template('confirm_delete.html', note=note)
 
+# Initialize database when module is imported (for production)
+init_database()
+
 if __name__ == '__main__':
-    init_database()
     debug_mode = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
     app.run(debug=debug_mode, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
